@@ -27,17 +27,25 @@ const useVideoStreams: UseVideoStreamsProps = (canvasRefs) => {
                 const drawFrame = () => {
                   if (context) {
                     context.clearRect(0, 0, canvas.width, canvas.height);
+                
                     if (canvasRef.isMirror) {
-                      context.setTransform(-1, 0, 0, 1, canvas.width, 0);
+                      context.setTransform(1, 0, 0, 1, 0, 0); // Сброс трансформаций
                     } else {
-                      context.setTransform(1, 0, 0, 1, 0, 0);
-                    }                    
+                      context.setTransform(-1, 0, 0, 1, canvas.width, 0); // Зеркально по горизонтали
+                    }
+                
                     context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+                    videoElement.currentTime += 0.0416
+
+                    if (!videoElement.paused && !videoElement.ended) {
+                      requestAnimationFrame(drawFrame);
+                    } else {
+                      videoElement.play();
+                      requestAnimationFrame(drawFrame);
+                    }
                   }
-                  setTimeout(() => {
-                    requestAnimationFrame(drawFrame);
-                  }, 1000 / 60);
                 };
+                
 
                 drawFrame();
               }
