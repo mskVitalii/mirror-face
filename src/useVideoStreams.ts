@@ -14,6 +14,7 @@ const useVideoStreams: UseVideoStreamsProps = (canvasRefs) => {
           if (canvasRef.ref.current) {
             const videoElement = document.createElement('video');
             videoElement.srcObject = stream;
+            videoElement.playsInline = true;
             videoElement.play();
             videoElement.addEventListener('loadedmetadata', () => {
               if (canvasRef.ref.current) {
