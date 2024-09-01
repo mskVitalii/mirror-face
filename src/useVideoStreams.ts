@@ -34,7 +34,9 @@ const useVideoStreams: UseVideoStreamsProps = (canvasRefs) => {
                     }                    
                     context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
                   }
-                  requestAnimationFrame(drawFrame);
+                  setTimeout(() => {
+                    requestAnimationFrame(drawFrame);
+                  }, 1000 / 60);
                 };
 
                 drawFrame();
