@@ -1,37 +1,18 @@
-import React, { useRef, useEffect } from 'react';
+import { forwardRef } from 'react';
+import './VideoComponent.css';
 
-type Props = {
-  rotate?: boolean;
-};
-const VideoComponent: React.FC<Props> = ({ rotate }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then((stream: MediaStream) => {
-          videoRef.current!.srcObject = stream;
-          videoRef.current!.play();
-        })
-        .catch((err: Error) => {
-          console.error('Error accessing the camera: ', err);
-        });
-    }
-  }, []);
-
+const VideoComponent = forwardRef<HTMLCanvasElement>((_, ref) => {
   return (
-    <video
-      ref={videoRef}
+    <canvas
+      ref={ref}
+      className='canvas'
       style={{
-        transform: rotate ? '' : 'scaleX(-1)',
-        width: '100%',
+        aspectRatio: '640 / 480',
+        width: '100%', // Это масштабирует холст, сохраняя пропорции
         height: 'auto',
       }}
-      autoPlay
-      muted
     />
   );
-};
+});
 
 export default VideoComponent;

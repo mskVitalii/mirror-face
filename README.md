@@ -2,6 +2,8 @@
 
 WebRTC Mirror is a web application that allows you to see yourself as others see you and compare that image with your reflection in the mirror.
 
+Small tool just 4 fun
+
 ## Description
 
 **WebRTC Mirror** displays two video streams from your device's front camera:

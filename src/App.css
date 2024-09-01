@@ -4,6 +4,7 @@ body {
 }
 
 #root {
+  width: 100vw;
   margin: 0 auto;
   padding-inline: 2rem;
   text-align: center;
@@ -18,6 +19,9 @@ body {
   color: #fff;
   border-radius: 25px;
   margin-left: .67em;
+}
+.h2 {
+  color: #fff;
 }
 
 .video-container {
@@ -45,8 +49,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 5rem; /* Большой текст */
-  color: #888; /* Серый цвет текста */
+  font-size: 5rem; 
+  color: #888;
   font-weight: 900;
   margin: 0 20px;
   position: relative;
@@ -68,3 +72,16 @@ body {
   }
 }
 
+
+.full {
+  width: 100%;
+  height: 100%;
+  background-color: #2f5b9c;
+  border-radius: 5%;
+  overflow: hidden;
+}
+
+
+.mirror {
+  background-color: #ff5e3a;
+} 
