@@ -30,9 +30,9 @@ const useVideoStreams: UseVideoStreamsProps = (canvasRefs) => {
                     context.clearRect(0, 0, canvas.width, canvas.height);
                 
                     if (canvasRef.isMirror) {
-                      context.setTransform(1, 0, 0, 1, 0, 0); // Сброс трансформаций
+                      context.setTransform(-1, 0, 0, 1, canvas.width, 0);
                     } else {
-                      context.setTransform(-1, 0, 0, 1, canvas.width, 0); // Зеркально по горизонтали
+                      context.setTransform(1, 0, 0, 1, 0, 0); 
                     }
                 
                     context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
