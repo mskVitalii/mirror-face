@@ -1,3 +1,19 @@
 .canvas {
   background: black;
 }
+
+.h2 {
+  color: #fff;
+}
+
+.full {
+  width: 100%;
+  height: 100%;
+  background-color: #2f5b9c;
+  border-radius: 5%;
+  overflow: hidden;
+}
+
+.mirror {
+  background-color: #ff5e3a;
+}

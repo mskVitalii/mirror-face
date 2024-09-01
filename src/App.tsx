@@ -8,26 +8,20 @@ function App() {
   const videoRef2 = useRef<HTMLCanvasElement>(null);
 
   useVideoStreams([
-    { ref: videoRef1, rotate: true },
-    { ref: videoRef2, rotate: false },
+    { ref: videoRef1, isMirror: false },
+    { ref: videoRef2, isMirror: true },
   ]);
 
   return (
     <>
       <h1 className='h1'>WebRTC mirror 🪞</h1>
       <div className='video-container'>
-        <div className='full'>
-          <VideoComponent ref={videoRef1} />
-          <h2 className='h2'>How people see you</h2>
-        </div>
+        <VideoComponent ref={videoRef1} />
         <div className='divider'>
           <hr />
           VS
         </div>
-        <div className='full mirror'>
-          <VideoComponent ref={videoRef2} />
-          <h2 className='h2'>Your face in the mirror</h2>
-        </div>
+        <VideoComponent isMirror ref={videoRef2} />
       </div>
     </>
   );

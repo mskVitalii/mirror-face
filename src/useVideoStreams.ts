@@ -2,7 +2,7 @@ import { useEffect, RefObject } from 'react';
 
 
 
-type UseVideoStreamsProps = (canvasRefs: {ref:RefObject<HTMLCanvasElement>, rotate: boolean}[]) => void;
+type UseVideoStreamsProps = (canvasRefs: {ref:RefObject<HTMLCanvasElement>, isMirror: boolean}[]) => void;
 
 const useVideoStreams: UseVideoStreamsProps = (canvasRefs) => {
   useEffect(() => {
@@ -15,27 +15,22 @@ const useVideoStreams: UseVideoStreamsProps = (canvasRefs) => {
             const videoElement = document.createElement('video');
             videoElement.srcObject = stream;
             videoElement.play();
-
             videoElement.addEventListener('loadedmetadata', () => {
               if (canvasRef.ref.current) {
                 const canvas = canvasRef.ref.current;
                 const context = canvas.getContext('2d');
 
-                // Сохранение пропорций видео
-                const videoWidth = videoElement.videoWidth;
-                const videoHeight = videoElement.videoHeight;
-
-                // Устанавливаем размеры холста в зависимости от пропорций видео
-                canvas.width = videoWidth;
-                canvas.height = videoHeight;
+                // Save video proportions
+                canvas.width = videoElement.videoWidth;
+                canvas.height = videoElement.videoHeight;
 
                 const drawFrame = () => {
                   if (context) {
                     context.clearRect(0, 0, canvas.width, canvas.height);
-                    if (canvasRef.rotate) {
-                      context.setTransform(1, 0, 0, 1, 0, 0); // Сброс трансформаций
+                    if (canvasRef.isMirror) {
+                      context.setTransform(-1, 0, 0, 1, canvas.width, 0);
                     } else {
-                      context.setTransform(-1, 0, 0, 1, canvas.width, 0); // Зеркально по горизонтали
+                      context.setTransform(1, 0, 0, 1, 0, 0);
                     }                    
                     context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
                   }
